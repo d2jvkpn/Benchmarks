@@ -35,7 +35,7 @@ func main() {
 		threads = runtime.NumCPU()
 	}
 
-	fmt.Printf("~~~ threads useage: %d/%d\n", threads, runtime.NumCPU())
+	fmt.Printf("~~~ threads usage: %d/%d\n", threads, runtime.NumCPU())
 	runtime.GOMAXPROCS(threads)
 
 	if release {
