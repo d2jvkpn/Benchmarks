@@ -1,0 +1,5 @@
+main
+target/
+data/
+configs/
+/vendor/
