@@ -50,5 +50,5 @@ async fn main() -> io::Result<()> {
 pub async fn hello() -> HttpResponse {
     HttpResponse::Ok()
         .content_type(ContentType::json())
-        .body(json!({"code":0,"msg":"not found"}).to_string())
+        .body(json!({"code":0,"msg":"not found","data":{}}).to_string())
 }

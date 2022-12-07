@@ -3,7 +3,10 @@ set -eu -o pipefail
 _wd=$(pwd)
 _path=$(dirname $0 | xargs -i readlink -f {})
 
-####
+#### install plow
+go install github.com/six-ddc/plow@latest
+
+#### create Benchmarks
 mkdir Benchmarks && cd Benchmarks
 git init
 # add .gitignore
@@ -22,7 +25,6 @@ git remote set-url --add origin git@gitlab.com:d2jvkpn/Benchmarks.git
 git add -A
 git commit -m "init"
 git push
-
 
 #### golang gin
 mkdir -p go-gin && cd go-gin && go mod init go-gin

@@ -50,27 +50,27 @@ Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 
 Summary:
   Elapsed         30s
-  Count       6652717
-    2xx       6652717
-  RPS      221751.500
-  Reads    28.761MB/s
-  Writes   13.324MB/s
+  Count       6637920
+    2xx       6637920
+  RPS      221244.814
+  Reads    30.805MB/s
+  Writes   13.294MB/s
 
 Statistics     Min       Mean     StdDev      Max   
-  Latency     47µs      2.301ms   3.288ms   125.8ms 
-  RPS       209157.12  221745.29  7954.56  238946.04
+  Latency     48µs      2.307ms   3.23ms   86.119ms 
+  RPS       206164.04  221231.18  7672.26  238174.39
 
 Latency Percentile:
-  P50       P75      P90      P95      P99      P99.9     P99.99 
-  1.185ms  2.25ms  5.745ms  9.351ms  16.017ms  26.818ms  40.849ms
+  P50        P75      P90      P95      P99      P99.9     P99.99 
+  1.213ms  2.336ms  5.728ms  9.332ms  15.504ms  26.543ms  39.481ms
 
 Latency Histogram:
-  1.982ms   6363963  95.66%
-  7.32ms     223314   3.36%
-  15.229ms    57987   0.87%
-  22.564ms     6463   0.10%
-  30.694ms      749   0.01%
-  36.812ms      164   0.00%
-  46.224ms       35   0.00%
-  54.986ms       42   0.00%
+  2.027ms   6320426  95.22%
+  5.963ms    236940   3.57%
+  11.543ms    60144   0.91%
+  17.12ms     15897   0.24%
+  23.954ms     3239   0.05%
+  33.131ms     1100   0.02%
+  39.078ms      172   0.00%
+  45.773ms        2   0.00%
 EOF
