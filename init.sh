@@ -7,14 +7,10 @@ _path=$(dirname $0 | xargs -i readlink -f {})
 go install github.com/six-ddc/plow@latest
 
 go version
-cat <<EOF
-go version go1.19.4 linux/amd64
-EOF
+# go version go1.19.4 linux/amd64
 
 rustc --version
-cat <<EOF
-rustc 1.67.0-nightly (53e4b9dd7 2022-12-04)
-EOF
+# rustc 1.67.0-nightly (53e4b9dd7 2022-12-04)
 
 #### create Benchmarks
 mkdir Benchmarks && cd Benchmarks
