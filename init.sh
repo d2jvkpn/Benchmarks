@@ -10,17 +10,19 @@ git init
 
 git remote add origin git@github.com:d2jvkpn/Benchmarks.git
 git pull git@github.com:d2jvkpn/Benchmarks.git master
+# git push --set-upstream origin master
+git branch --set-upstream-to=origin/master master
 git branch -M master
 
 git config user.name d2jvkpn
 git config user.email chenbin2018@protonmail.com
 
+git remote set-url --add origin git@gitlab.com:d2jvkpn/Benchmarks.git
+
 git add -A
 git commit -m "init"
+git push
 
-# git branch --set-upstream-to=origin/master master
-
-git remote set-url --add origin git@github.com/d2jvkpn/pieces.git
 
 #### golang gin
 mkdir -p go-gin && cd go-gin && go mod init go-gin
