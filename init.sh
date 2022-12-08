@@ -32,6 +32,10 @@ git add -A
 git commit -m "init"
 git push
 
+#### golang fasthttp
+mkdir -p go-fasthttp && cd go-fasthttp && go mod init go-fasthttp
+go get github.com/valyala/fasthttp
+
 #### golang gin
 mkdir -p go-gin && cd go-gin && go mod init go-gin
 go get github.com/gin-gonic/gin
