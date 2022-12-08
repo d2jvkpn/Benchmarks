@@ -3,6 +3,42 @@ set -eu -o pipefail
 _wd=$(pwd)
 _path=$(dirname $0 | xargs -i readlink -f {})
 
+#### go-fasthttp
+go run main.go -addr=:8000 -threads=8
+
+plow http://127.0.0.1:8000/hello --concurrency=256 --duration=30s --timeout=2s
+
+cat <<EOF
+Benchmarking http://127.0.0.1:8000/hello for 30s using 256 connection(s).
+@ Real-time charts is listening on http://[::]:18888
+
+Summary:
+  Elapsed         30s
+  Count       3818870
+    2xx       3818870
+  RPS      127295.322
+  Reads    19.060MB/s
+  Writes    7.649MB/s
+
+Statistics     Min       Mean     StdDev      Max   
+  Latency     39µs      2.008ms   2.734ms  229.209ms
+  RPS       102560.46  127380.04  5860.81  135382.75
+
+Latency Percentile:
+  P50      P75      P90      P95      P99     P99.9    P99.99 
+  385µs  2.903ms  5.373ms  7.255ms  10.587ms  15.9ms  23.894ms
+
+Latency Histogram:
+  395µs     2171500  56.86%
+  3.99ms    1605892  42.05%
+  9.457ms     38993   1.02%
+  12.154ms     1867   0.05%
+  15.304ms      493   0.01%
+  18.729ms      106   0.00%
+  21.988ms       18   0.00%
+  26.015ms        1   0.00%
+EOF
+
 #### go-gin
 go run main.go -release -addr=:8000 -threads=8
 
