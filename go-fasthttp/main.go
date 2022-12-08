@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/json"
+	// "encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -38,8 +38,9 @@ func main() {
 
 func hello(ctx *fasthttp.RequestCtx) {
 	ctx.SetContentType("application/json")
-	bts, _ := json.Marshal(map[string]any{"code": 0, "msg": "ok", "data": map[string]any{}})
-	_, _ = ctx.Write(bts)
+	// bts, _ := json.Marshal(map[string]any{"code": 0, "msg": "ok", "data": map[string]any{}})
+	// _, _ = ctx.Write(bts)
+	_, _ = ctx.Write([]byte(`{"code":0,"msg":"ok","data":{}}`))
 }
 
 func requestHandler(ctx *fasthttp.RequestCtx) {

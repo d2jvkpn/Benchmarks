@@ -3,6 +3,42 @@ set -eu -o pipefail
 _wd=$(pwd)
 _path=$(dirname $0 | xargs -i readlink -f {})
 
+#### go-fasthttp
+go run main.go -addr=:8000 -threads=8
+
+plow http://127.0.0.1:8000/hello --concurrency=512 --duration=30s --timeout=2s
+
+cat <<EOF
+Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
+@ Real-time charts is listening on http://[::]:18888
+
+Summary:
+  Elapsed         30s
+  Count       4246205
+    2xx       4246205
+  RPS      141537.119
+  Reads    21.192MB/s
+  Writes    8.505MB/s
+
+Statistics     Min       Mean     StdDev      Max   
+  Latency     33µs      3.612ms   5.104ms  442.676ms
+  RPS       136635.14  141538.81  2883.41  147708.58
+
+Latency Percentile:
+  P50      P75      P90      P95       P99      P99.9    P99.99 
+  305µs  5.053ms  9.521ms  13.177ms  18.723ms  28.01ms  49.956ms
+
+Latency Histogram:
+  724µs     2497439  58.82%
+  7.378ms   1646530  38.78%
+  11.977ms    78180   1.84%
+  16.921ms    18364   0.43%
+  22.606ms     4828   0.11%
+  27.481ms      707   0.02%
+  32.77ms       144   0.00%
+  37.614ms       13   0.00%
+EOF
+
 #### go-gin
 go run main.go -release -addr=:8000 -threads=8
 
@@ -14,29 +50,29 @@ Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 
 Summary:
   Elapsed         30s
-  Count       3712392
-    2xx       3712392
-  RPS      123746.241
-  Reads    18.174MB/s
-  Writes    7.436MB/s
+  Count       4235571
+    2xx       4235571
+  RPS      141185.549
+  Reads    18.716MB/s
+  Writes    8.484MB/s
 
-Statistics     Min       Mean    StdDev      Max   
-  Latency     54µs     4.131ms   3.979ms  167.166ms
-  RPS       116237.26  123934.2  3684.43  130069.42
+Statistics     Min       Mean     StdDev      Max   
+  Latency     47µs      3.621ms   3.612ms  139.387ms
+  RPS       134474.42  141182.13  3881.74  149657.96
 
 Latency Percentile:
-  P50       P75      P90      P95       P99      P99.9     P99.99 
-  3.167ms  5.88ms  8.542ms  10.704ms  18.476ms  30.718ms  98.813ms
+  P50        P75      P90      P95      P99      P99.9     P99.99 
+  2.716ms  5.054ms  7.391ms  9.585ms  17.505ms  29.211ms  66.872ms
 
 Latency Histogram:
-  3.957ms   3648271  98.27%
-  12.148ms    54105   1.46%
-  21.376ms     6795   0.18%
-  28.685ms     2554   0.07%
-  34.188ms      592   0.02%
-  39.68ms        55   0.00%
-  43.355ms       12   0.00%
-  57.307ms        8   0.00%
+  3.381ms   4058082  95.81%
+  7.315ms    140207   3.31%
+  13.602ms    28659   0.68%
+  21.291ms     6527   0.15%
+  29.895ms     1813   0.04%
+  35.373ms      245   0.01%
+  45.292ms       37   0.00%
+  48.952ms        1   0.00%
 EOF
 
 #### rust-actix
@@ -50,27 +86,27 @@ Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 
 Summary:
   Elapsed         30s
-  Count       6637920
-    2xx       6637920
-  RPS      221244.814
-  Reads    30.805MB/s
-  Writes   13.294MB/s
+  Count       6755806
+    2xx       6755806
+  RPS      225165.814
+  Reads    31.351MB/s
+  Writes   13.529MB/s
 
 Statistics     Min       Mean     StdDev      Max   
-  Latency     48µs      2.307ms   3.23ms   86.119ms 
-  RPS       206164.04  221231.18  7672.26  238174.39
+  Latency     42µs      2.267ms   3.196ms  104.294ms
+  RPS       215149.79  225124.89  6959.68  238954.1 
 
 Latency Percentile:
-  P50        P75      P90      P95      P99      P99.9     P99.99 
-  1.213ms  2.336ms  5.728ms  9.332ms  15.504ms  26.543ms  39.481ms
+  P50        P75     P90     P95      P99      P99.9     P99.99 
+  1.183ms  2.282ms  5.62ms  9.18ms  15.174ms  26.181ms  41.452ms
 
 Latency Histogram:
-  2.027ms   6320426  95.22%
-  5.963ms    236940   3.57%
-  11.543ms    60144   0.91%
-  17.12ms     15897   0.24%
-  23.954ms     3239   0.05%
-  33.131ms     1100   0.02%
-  39.078ms      172   0.00%
-  45.773ms        2   0.00%
+  1.831ms   6174174  91.39%
+  4.812ms    402647   5.96%
+  9.552ms    124068   1.84%
+  14.697ms    42813   0.63%
+  19.779ms     9253   0.14%
+  24.551ms     2023   0.03%
+  31.46ms       721   0.01%
+  39.928ms      107   0.00%
 EOF
