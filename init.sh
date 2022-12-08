@@ -30,6 +30,7 @@ git remote set-url --add origin git@gitlab.com:d2jvkpn/Benchmarks.git
 
 git add -A
 git commit -m "init"
+git push --set-upstream origin master
 git push
 
 #### golang fasthttp
