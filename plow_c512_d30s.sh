@@ -14,29 +14,29 @@ Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 
 Summary:
   Elapsed         30s
-  Count       4246205
-    2xx       4246205
-  RPS      141537.119
-  Reads    21.192MB/s
-  Writes    8.505MB/s
+  Count       7082055
+    2xx       7082055
+  RPS      236060.089
+  Reads    35.345MB/s
+  Writes   14.184MB/s
 
 Statistics     Min       Mean     StdDev      Max   
-  Latency     33µs      3.612ms   5.104ms  442.676ms
-  RPS       136635.14  141538.81  2883.41  147708.58
+  Latency     18µs      2.165ms   2.578ms  147.668ms
+  RPS       214654.63  236046.51  8889.08  256044.99
 
 Latency Percentile:
-  P50      P75      P90      P95       P99      P99.9    P99.99 
-  305µs  5.053ms  9.521ms  13.177ms  18.723ms  28.01ms  49.956ms
+  P50        P75     P90     P95      P99      P99.9     P99.99 
+  1.455ms  2.901ms  4.48ms  6.16ms  13.549ms  23.685ms  35.505ms
 
 Latency Histogram:
-  724µs     2497439  58.82%
-  7.378ms   1646530  38.78%
-  11.977ms    78180   1.84%
-  16.921ms    18364   0.43%
-  22.606ms     4828   0.11%
-  27.481ms      707   0.02%
-  32.77ms       144   0.00%
-  37.614ms       13   0.00%
+  1.995ms   6787529  95.84%
+  4.982ms    253041   3.57%
+  10.815ms    33221   0.47%
+  17.747ms     5616   0.08%
+  24.749ms     1802   0.03%
+  29.099ms      573   0.01%
+  32.381ms      179   0.00%
+  34.951ms       94   0.00%
 EOF
 
 #### go-gin
@@ -50,29 +50,29 @@ Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 
 Summary:
   Elapsed         30s
-  Count       4235571
-    2xx       4235571
-  RPS      141185.549
-  Reads    18.716MB/s
-  Writes    8.484MB/s
+  Count       4677756
+    2xx       4677756
+  RPS      155925.057
+  Reads    22.900MB/s
+  Writes    9.369MB/s
 
 Statistics     Min       Mean     StdDev      Max   
-  Latency     47µs      3.621ms   3.612ms  139.387ms
-  RPS       134474.42  141182.13  3881.74  149657.96
+  Latency     26µs      3.279ms   3.21ms   117.996ms
+  RPS       128151.39  155916.61  8155.05  167414.07
 
 Latency Percentile:
-  P50        P75      P90      P95      P99      P99.9     P99.99 
-  2.716ms  5.054ms  7.391ms  9.585ms  17.505ms  29.211ms  66.872ms
+  P50       P75      P90      P95      P99      P99.9     P99.99 
+  2.518ms  4.61ms  6.835ms  8.739ms  15.069ms  24.996ms  51.511ms
 
 Latency Histogram:
-  3.381ms   4058082  95.81%
-  7.315ms    140207   3.31%
-  13.602ms    28659   0.68%
-  21.291ms     6527   0.15%
-  29.895ms     1813   0.04%
-  35.373ms      245   0.01%
-  45.292ms       37   0.00%
-  48.952ms        1   0.00%
+  2.648ms   4095461  87.55%
+  6.305ms    438840   9.38%
+  10.518ms   111165   2.38%
+  16.099ms    25913   0.55%
+  21.692ms     5446   0.12%
+  25.513ms      886   0.02%
+  30.262ms       44   0.00%
+  35.702ms        1   0.00%
 EOF
 
 #### rust-actix
@@ -86,27 +86,27 @@ Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 
 Summary:
   Elapsed         30s
-  Count       6755806
-    2xx       6755806
-  RPS      225165.814
-  Reads    31.351MB/s
-  Writes   13.529MB/s
+  Count       9253183
+    2xx       9253183
+  RPS      308428.660
+  Reads    42.945MB/s
+  Writes   18.532MB/s
 
-Statistics     Min       Mean     StdDev      Max   
-  Latency     42µs      2.267ms   3.196ms  104.294ms
-  RPS       215149.79  225124.89  6959.68  238954.1 
+Statistics     Min       Mean      StdDev      Max   
+  Latency     24µs      1.654ms   2.237ms   60.807ms 
+  RPS       268201.89  308432.14  16034.75  334034.27
 
 Latency Percentile:
-  P50        P75     P90     P95      P99      P99.9     P99.99 
-  1.183ms  2.282ms  5.62ms  9.18ms  15.174ms  26.181ms  41.452ms
+  P50        P75     P90      P95      P99      P99.9     P99.99 
+  1.135ms  1.546ms  3.15ms  5.378ms  12.756ms  20.898ms  31.129ms
 
 Latency Histogram:
-  1.831ms   6174174  91.39%
-  4.812ms    402647   5.96%
-  9.552ms    124068   1.84%
-  14.697ms    42813   0.63%
-  19.779ms     9253   0.14%
-  24.551ms     2023   0.03%
-  31.46ms       721   0.01%
-  39.928ms      107   0.00%
+  1.551ms   9043684  97.74%
+  4.659ms    171013   1.85%
+  11.009ms    30543   0.33%
+  17.03ms      6253   0.07%
+  24.388ms     1401   0.02%
+  34.117ms      284   0.00%
+  42.732ms        2   0.00%
+  54.62ms         3   0.00%
 EOF

@@ -11,7 +11,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	// "net/http"
+	"net/http"
 	"runtime"
 
 	"github.com/gin-gonic/gin"
@@ -47,9 +47,9 @@ func main() {
 	router = &engine.RouterGroup
 
 	router.GET("/hello", func(ctx *gin.Context) {
-		// ctx.JSON(http.StatusOK, gin.H{"code": 0, "msg": "ok", "data": gin.H{}})
-		ctx.Header("Content-Type", "application/json")
-		ctx.Writer.Write([]byte(`{"code":0,"msg":"ok","data":{}}`))
+		ctx.JSON(http.StatusOK, gin.H{"code": 0, "msg": "ok", "data": gin.H{}})
+		// ctx.Header("Content-Type", "application/json")
+		// ctx.Writer.Write([]byte(`{"code":0,"msg":"ok","data":{}}`))
 	})
 
 	fmt.Printf(">>> HTTP Listening on %s\n", addr)

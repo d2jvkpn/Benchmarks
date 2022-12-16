@@ -52,4 +52,5 @@ pub async fn hello() -> HttpResponse {
     HttpResponse::Ok()
         .content_type(ContentType::json())
         .body(json!({"code":0,"msg":"not found","data":{}}).to_string())
+    // .body(r#"{"code\":0,"msg":"not found","data":{}}"#)
 }
