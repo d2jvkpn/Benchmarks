@@ -5,7 +5,7 @@ use structopt::StructOpt;
 
 #[allow(dead_code)]
 #[derive(Debug, StructOpt)]
-#[structopt(name = "rust-actix", about = "actix-web demo")]
+#[structopt(name = "rust-axum", about = "axum demo")]
 struct Opt {
     #[structopt(long, default_value = "0.0.0.0", help = "http server address")]
     addr: String,
