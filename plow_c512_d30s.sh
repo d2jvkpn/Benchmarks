@@ -110,3 +110,39 @@ Latency Histogram:
   42.732ms        2   0.00%
   54.62ms         3   0.00%
 EOF
+
+#### rust-axum
+cargo run --release -- --release --port=8000
+
+plow http://127.0.0.1:8000/hello --concurrency=512 --duration=30s --timeout=2s
+
+cat <<EOF
+Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
+@ Real-time charts is listening on http://[::]:18888
+
+Summary:
+  Elapsed         30s
+  Count       7315399
+    2xx       7315399
+  RPS      243831.669
+  Reads    37.206MB/s
+  Writes   14.651MB/s
+
+Statistics     Min       Mean     StdDev      Max   
+  Latency     25µs      2.096ms   4.572ms  1.076133s
+  RPS       231736.75  244058.47  6740.36  256288.84
+
+Latency Percentile:
+  P50        P75      P90      P95      P99     P99.9     P99.99 
+  1.797ms  2.698ms  3.772ms  4.573ms  6.498ms  10.836ms  39.277ms
+
+Latency Histogram:
+  2.081ms   7271666  99.40%
+  4.019ms     36535   0.50%
+  6.193ms      6014   0.08%
+  9.415ms      1012   0.01%
+  12.079ms      134   0.00%
+  14.977ms       30   0.00%
+  17.607ms        7   0.00%
+  19.776ms        1   0.00%
+EOF
