@@ -1,14 +1,16 @@
-#! /usr/bin/env bash
-set -eu -o pipefail
-_wd=$(pwd)
-_path=$(dirname $0 | xargs -i readlink -f {})
+## Benchmark
+- concurrency: 256
+- duration: 30s
+- timeout: 2s
 
 #### go-fasthttp
+```bash
 go run main.go -addr=:8000 -threads=8
 
 plow http://127.0.0.1:8000/hello --concurrency=512 --duration=30s --timeout=2s
+```
 
-cat <<EOF
+```terminal
 Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 @ Real-time charts is listening on http://[::]:18888
 
@@ -37,14 +39,16 @@ Latency Histogram:
   29.099ms      573   0.01%
   32.381ms      179   0.00%
   34.951ms       94   0.00%
-EOF
+```
 
 #### go-gin
+```bash
 go run main.go -release -addr=:8000 -threads=8
 
 plow http://127.0.0.1:8000/hello --concurrency=512 --duration=30s --timeout=2s
+```
 
-cat <<EOF
+```terminal
 Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 @ Real-time charts is listening on http://[::]:18888
 
@@ -73,14 +77,16 @@ Latency Histogram:
   25.513ms      886   0.02%
   30.262ms       44   0.00%
   35.702ms        1   0.00%
-EOF
+```
 
 #### rust-actix
+```bash
 cargo run --release -- --release --port=8000 --threads=8
 
 plow http://127.0.0.1:8000/hello --concurrency=512 --duration=30s --timeout=2s
+```
 
-cat <<EOF
+```terminal
 Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 @ Real-time charts is listening on http://[::]:18888
 
@@ -109,14 +115,16 @@ Latency Histogram:
   34.117ms      284   0.00%
   42.732ms        2   0.00%
   54.62ms         3   0.00%
-EOF
+```
 
 #### rust-axum
+```bash
 cargo run --release -- --release --port=8000
 
 plow http://127.0.0.1:8000/hello --concurrency=512 --duration=30s --timeout=2s
+```
 
-cat <<EOF
+```terminal
 Benchmarking http://127.0.0.1:8000/hello for 30s using 512 connection(s).
 @ Real-time charts is listening on http://[::]:18888
 
@@ -145,4 +153,4 @@ Latency Histogram:
   14.977ms       30   0.00%
   17.607ms        7   0.00%
   19.776ms        1   0.00%
-EOF
+```
