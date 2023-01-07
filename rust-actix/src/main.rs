@@ -31,7 +31,7 @@ async fn main() -> io::Result<()> {
     let mut opt = Opt::from_args();
 
     let threads = thread::available_parallelism().unwrap().get();
-    if opt.threads == 0 || opt.threads > threads {
+    if opt.threads > threads {
         opt.threads = threads;
     }
     println!("~~~ threads usage: {}/{}", opt.threads, threads);
@@ -39,11 +39,9 @@ async fn main() -> io::Result<()> {
     let addr = format!("{}:{}", &opt.addr, opt.port);
     println!(">>> HTTP listening on {}", addr);
 
-    HttpServer::new(|| App::new().route("/hello", web::get().to(hello)))
-        .workers(opt.threads)
-        .bind(&addr)?
-        .run()
-        .await?;
+    let server = HttpServer::new(|| App::new().route("/hello", web::get().to(hello)));
+    let server = if opt.threads > 0 { server.workers(opt.threads) } else { server };
+    server.bind(&addr)?.run().await?;
 
     Ok(())
 }

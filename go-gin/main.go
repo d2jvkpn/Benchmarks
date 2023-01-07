@@ -26,17 +26,18 @@ func main() {
 		router  *gin.RouterGroup
 	)
 
-	flag.StringVar(&addr, "addr", ":8080", "http server address")
+	flag.StringVar(&addr, "addr", ":8080", "http  address to listen to")
 	flag.IntVar(&threads, "threads", 0, "threads limit")
 	flag.BoolVar(&release, "release", false, "run in release mode")
 	flag.Parse()
 
-	if threads == 0 || threads > runtime.NumCPU() {
+	if threads > runtime.NumCPU() {
 		threads = runtime.NumCPU()
 	}
-
 	fmt.Printf("~~~ threads usage: %d/%d\n", threads, runtime.NumCPU())
-	runtime.GOMAXPROCS(threads)
+	if threads > 0 {
+		runtime.GOMAXPROCS(threads)
+	}
 
 	if release {
 		gin.SetMode(gin.ReleaseMode)

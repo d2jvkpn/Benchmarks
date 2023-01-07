@@ -16,16 +16,17 @@ func main() {
 		addr    string
 	)
 
-	flag.StringVar(&addr, "addr", ":8000", "TCP address to listen to")
+	flag.StringVar(&addr, "addr", ":8000", "http address to listen to")
 	flag.IntVar(&threads, "threads", 0, "threads limit")
 	flag.Parse()
 
-	if threads == 0 || threads > runtime.NumCPU() {
+	if threads > runtime.NumCPU() {
 		threads = runtime.NumCPU()
 	}
-
 	fmt.Printf("~~~ threads usage: %d/%d\n", threads, runtime.NumCPU())
-	runtime.GOMAXPROCS(threads)
+	if threads > 0 {
+		runtime.GOMAXPROCS(threads)
+	}
 
 	handler := hello
 	handler = fasthttp.CompressHandler(handler)
