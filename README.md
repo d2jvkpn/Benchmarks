@@ -156,7 +156,7 @@ Latency Histogram:
 ```
 
 ## 2. Benchmark 2
-- concurrency: 256
+- concurrency: 512
 - duration: 30s
 - timeout: 2s
 
