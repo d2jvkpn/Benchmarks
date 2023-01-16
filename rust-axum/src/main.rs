@@ -1,8 +1,8 @@
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Router, Server};
+use chrono::prelude::*;
 use serde_json::json;
 use std::net::SocketAddr;
 use structopt::StructOpt;
-use chrono::prelude::*;
 
 #[allow(dead_code)]
 #[derive(Debug, StructOpt)]
@@ -31,13 +31,13 @@ async fn main() {
     let addr: SocketAddr =
         format!("{}:{}", opt.addr, opt.port).parse().expect("Unable to parse socket address");
 
-    println!("Listening on {:?}", addr);
+    println!(">>> Listening on {:?}", addr);
 
     Server::bind(&addr).serve(app.into_make_service()).await.unwrap();
 }
 
 pub async fn index_handler() -> impl IntoResponse {
-	let now: DateTime<Local> = Local::now();
+    let now: DateTime<Local> = Local::now();
 
     (StatusCode::CREATED, json!({"code":0,"msg":"ok","data":{"time": now}}).to_string())
 }
