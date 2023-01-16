@@ -2,6 +2,7 @@ use axum::{http::StatusCode, response::IntoResponse, routing::get, Router, Serve
 use serde_json::json;
 use std::net::SocketAddr;
 use structopt::StructOpt;
+use chrono::prelude::*;
 
 #[allow(dead_code)]
 #[derive(Debug, StructOpt)]
@@ -36,5 +37,7 @@ async fn main() {
 }
 
 pub async fn index_handler() -> impl IntoResponse {
-    (StatusCode::CREATED, json!({"code":0,"msg":"not found","data":{}}).to_string())
+	let now: DateTime<Local> = Local::now();
+
+    (StatusCode::CREATED, json!({"code":0,"msg":"ok","data":{"time": now}}).to_string())
 }

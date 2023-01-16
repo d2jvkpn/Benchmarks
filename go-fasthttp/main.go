@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"runtime"
+	"time"
 
 	"github.com/valyala/fasthttp"
 )
@@ -38,8 +39,12 @@ func main() {
 }
 
 func hello(ctx *fasthttp.RequestCtx) {
+	now := time.Now()
+
 	ctx.SetContentType("application/json")
-	bts, _ := json.Marshal(map[string]any{"code": 0, "msg": "ok", "data": map[string]any{}})
+	bts, _ := json.Marshal(map[string]any{"code": 0, "msg": "ok", "data": map[string]any{
+		"time": now.Format(time.RFC3339),
+	}})
 	_, _ = ctx.Write(bts)
 	// _, _ = ctx.Write([]byte(`{"code":0,"msg":"ok","data":{}}`))
 }

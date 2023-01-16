@@ -5,6 +5,7 @@
     ```
 !*/
 use actix_web::{http::header::ContentType, web, App, HttpResponse, HttpServer};
+use chrono::prelude::*;
 use serde_json::json;
 use std::{io, thread};
 use structopt::StructOpt;
@@ -47,8 +48,11 @@ async fn main() -> io::Result<()> {
 }
 
 pub async fn hello() -> HttpResponse {
+    let now: DateTime<Local> = Local::now();
+    // let now = now.to_rfc3339_opts(SecondsFormat::Millis, true);
+
     HttpResponse::Ok()
         .content_type(ContentType::json())
-        .body(json!({"code":0,"msg":"not found","data":{}}).to_string())
+        .body(json!({"code":0,"msg":"ok","data":{"time": now}}).to_string())
     // .body(r#"{"code\":0,"msg":"not found","data":{}}"#)
 }
