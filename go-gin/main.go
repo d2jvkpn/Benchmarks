@@ -52,7 +52,7 @@ func main() {
 		now := time.Now()
 
 		ctx.JSON(http.StatusOK, gin.H{"code": 0, "msg": "ok", "data": gin.H{
-			"time": now.Format(time.RFC3339),
+			"time": now.Format(time.RFC3339Nano),
 		}})
 		// ctx.Header("Content-Type", "application/json")
 		// ctx.Writer.Write([]byte(`{"code":0,"msg":"ok","data":{}}`))

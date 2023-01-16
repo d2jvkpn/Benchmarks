@@ -43,7 +43,7 @@ func hello(ctx *fasthttp.RequestCtx) {
 
 	ctx.SetContentType("application/json")
 	bts, _ := json.Marshal(map[string]any{"code": 0, "msg": "ok", "data": map[string]any{
-		"time": now.Format(time.RFC3339),
+		"time": now.Format(time.RFC3339Nano),
 	}})
 	_, _ = ctx.Write(bts)
 	// _, _ = ctx.Write([]byte(`{"code":0,"msg":"ok","data":{}}`))

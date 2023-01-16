@@ -44,3 +44,4 @@ go get github.com/gin-gonic/gin
 #### rust actix-web
 cargo new --bin rust-actix && cd rust-actix
 cargo add actix_web serde_json structopt
+cargo add chrono --features=serde
