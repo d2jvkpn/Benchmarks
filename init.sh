@@ -7,10 +7,10 @@ _path=$(dirname $0 | xargs -i readlink -f {})
 go install github.com/six-ddc/plow@latest
 
 go version
-# go version go1.19.4 linux/amd64
+# go version go1.22.1 linux/amd64
 
 rustc --version
-# rustc 1.67.0-nightly (53e4b9dd7 2022-12-04)
+# rustc 1.78.0-nightly (7d3702e47 2024-03-06)
 
 #### create Benchmarks
 mkdir Benchmarks && cd Benchmarks
@@ -43,5 +43,6 @@ go get github.com/gin-gonic/gin
 
 #### rust actix-web
 cargo new --bin rust-actix && cd rust-actix
-cargo add actix_web serde_json structopt
+cargo add actix_web serde_json
+cargo add clap --features=derive
 cargo add chrono --features=serde

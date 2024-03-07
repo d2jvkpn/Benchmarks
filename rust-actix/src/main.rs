@@ -1,35 +1,36 @@
 /*!
     ```bash
-    cargo add actix_web serde_json structopt
+    cargo add actix_web serde_json
+    cargo add clap --features=derive
     cargo run --release -- --port 8000 --release
     ```
 !*/
 use actix_web::{http::header::ContentType, web, App, HttpResponse, HttpServer};
 use chrono::prelude::*;
+use clap::Parser;
 use serde_json::json;
-use std::{io, thread};
-use structopt::StructOpt;
 
-#[allow(dead_code)]
-#[derive(Debug, StructOpt)]
-#[structopt(name = "rust-actix", about = "actix-web demo")]
-struct Opt {
-    #[structopt(long, default_value = "0.0.0.0", help = "http server address")]
+use std::{io, thread};
+
+#[derive(Debug, Parser)]
+#[clap(name = "rust-actix", about = "actix-web demo")]
+struct Args {
+    #[clap(short = 'a', long = "addr", default_value = "0.0.0.0", help = "http server address")]
     addr: String,
 
-    #[structopt(long = "port", default_value = "8000", help = "http server port")]
+    #[clap(long = "port", default_value = "8000", help = "http server port")]
     port: u16,
 
-    #[structopt(long, default_value = "0", help = "threads limit")]
+    #[clap(long, default_value = "0", help = "threads limit")]
     threads: usize,
 
-    #[structopt(long, help = "run in release mode")]
+    #[clap(long, help = "run in release mode")]
     release: bool,
 }
 
 #[actix_web::main]
 async fn main() -> io::Result<()> {
-    let mut opt = Opt::from_args();
+    let mut opt = Args::parse();
 
     let threads = thread::available_parallelism().unwrap().get();
     if opt.threads > threads {

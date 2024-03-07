@@ -1,35 +1,35 @@
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Router, Server};
 use chrono::prelude::*;
 use serde_json::json;
-use std::net::SocketAddr;
-use structopt::StructOpt;
+use clap::Parser;
 
-#[allow(dead_code)]
-#[derive(Debug, StructOpt)]
-#[structopt(name = "rust-axum", about = "axum demo")]
-struct Opt {
-    #[structopt(long, default_value = "0.0.0.0", help = "http server address")]
+use std::net::SocketAddr;
+
+#[derive(Debug, Parser)]
+#[clap(name = "rust-axum", about = "axum demo")]
+struct Args {
+    #[clap(long, default_value = "0.0.0.0", help = "http server address")]
     addr: String,
 
-    #[structopt(long = "port", default_value = "8000", help = "http server port")]
+    #[clap(long = "port", default_value = "8000", help = "http server port")]
     port: u16,
 
-    #[structopt(long, default_value = "0", help = "threads limit")]
+    #[clap(long, default_value = "0", help = "threads limit")]
     threads: usize,
 
-    #[structopt(long, help = "run in release mode")]
+    #[clap(long, help = "run in release mode")]
     release: bool,
 }
 
 #[tokio::main]
 async fn main() {
-    let opt = Opt::from_args();
+    let args = Args::parse();
 
     let app = Router::new().route("/hello", get(index_handler));
 
     // let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
     let addr: SocketAddr =
-        format!("{}:{}", opt.addr, opt.port).parse().expect("Unable to parse socket address");
+        format!("{}:{}", args.addr, args.port).parse().expect("Unable to parse socket address");
 
     println!(">>> Listening on {:?}", addr);
 
